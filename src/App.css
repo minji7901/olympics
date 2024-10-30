@@ -1,0 +1,33 @@
+.medal__container {
+  @apply h-[600px] px-10 shadow-2xl rounded-xl border border-softly-100 bg-white overflow-auto;
+}
+.medal__table {
+  @apply table-auto w-full;
+}
+.medal__table th {
+  @apply py-5 text-softly-300 font-normal;
+}
+.medal__table th span {
+  @apply block w-4 h-4 rounded-full mx-auto;
+  box-shadow: inset 5px 5px 5px 2px rgba(0, 0, 0, 0.2);
+}
+.medal__table td {
+  @apply py-3 text-center border-b border-softly-100;
+}
+.medal__table td:nth-child(n + 2):nth-child(-n + 4) {
+  @apply text-primary-200;
+}
+.medal__table td:nth-child(n + 2):nth-child(-n + 5) {
+  width: 70px;
+}
+.medal__table td:nth-child(6) {
+  @apply text-default;
+}
+.medal__table td button {
+  @apply px-3 py-1 text-sm text-white bg-[#FF4D4D] rounded-md hover:bg-[#FF1A1A] transition;
+}
+.add__btn {
+  @apply flex-1 px-5 rounded-md text-white bg-secondly-100 hover:bg-secondly-200 transition;
+  box-shadow: inset 2px 2px 3px rgb(0, 0, 0, 0.1),
+    3px 3px 5px rgba(0, 0, 0, 0.5);
+}
