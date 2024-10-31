@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import { createRoot } from "react-dom/client";
-import "./App.css";
-import "./index.css";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
-import MedalList from "./components/MedalList";
+import MedalCont from "./components/MedalCont";
 import MedalForm from "./components/MedalForm";
+import MedalFilter from "./components/MedalFilter";
 
 function App() {
   const [medalItems, setMedalItems] = useState([]);
+
+  useEffect(() => {
+    setMedalItems(JSON.parse(localStorage.getItem("medalData")) || []);
+  }, []);
+
   return (
-    <>
-      <Header />
-      <MedalForm medalItems={medalItems} setMedalItems={setMedalItems} />
-      <MedalList medalItems={medalItems} setMedalItems={setMedalItems} />
-    </>
+    <div className="h-screen flex justify-center pt-8 bg-gradient-to-br to-white from-primary-100 text-default font-custom">
+      <div className="w-full max-w-custom min-w-custom">
+        <Header />
+        <MedalForm medalItems={medalItems} setMedalItems={setMedalItems} />
+        <MedalFilter />
+        <MedalCont medalItems={medalItems} setMedalItems={setMedalItems} />
+      </div>
+    </div>
   );
 }
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-
-root.render(<App />);
 export default App;
