@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import MedalCont from "./components/MedalCont";
 import MedalForm from "./components/MedalForm";
-import MedalFilter from "./components/MedalFilter";
 
 function App() {
   const [medalItems, setMedalItems] = useState([]);
@@ -16,7 +15,6 @@ function App() {
       <div className="w-full max-w-custom min-w-custom">
         <Header />
         <MedalForm medalItems={medalItems} setMedalItems={setMedalItems} />
-        <MedalFilter />
         <MedalCont medalItems={medalItems} setMedalItems={setMedalItems} />
       </div>
     </div>
