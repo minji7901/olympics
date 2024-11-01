@@ -3,9 +3,12 @@ import MedalFilter from "./MedalFilter";
 import MedalItem from "./MedalItem";
 import { IoAlertCircleOutline } from "react-icons/io5";
 
-export default function MedalCont({ medalItems, setMedalItems }) {
-  const [selected, setSelected] = useState("gold");
-
+export default function MedalCont({
+  medalItems,
+  setMedalItems,
+  selected,
+  setSelected,
+}) {
   useEffect(() => {
     const sortedItems = [...medalItems].sort((a, b) => {
       return b[selected] - a[selected];

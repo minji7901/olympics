@@ -5,6 +5,7 @@ export default function MadalFilter({ selected, setSelected }) {
   const filterList = ["gold", "silver", "bronze", "total"];
 
   const handleSelect = (e) => {
+    localStorage.setItem("filter",JSON.stringify(e.target.value))
     setSelected(e.target.value);
   };
 

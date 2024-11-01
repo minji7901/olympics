@@ -10,13 +10,6 @@ export default function MedalItem({ medalItems, setMedalItems }) {
     localStorage.setItem("medalData", JSON.stringify(getData));
   };
 
-  useEffect(() => {
-    const sortedItems = [...medalItems].sort((a, b) => {
-      return b.gold - a.gold;
-    });
-    setMedalItems(sortedItems);
-  }, []);
-
   return medalItems.map((data) => (
     <tr key={data.id}>
       <td className="py-3 text-lg text-center border-b border-softly-100">

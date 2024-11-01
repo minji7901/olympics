@@ -8,7 +8,7 @@ const initialInputValues = () => ({
   total: 0,
 });
 
-export default function MedalForm({ medalItems, setMedalItems }) {
+export default function MedalForm({ medalItems, setMedalItems, selected }) {
   const [inputValues, setInputValues] = useState(initialInputValues);
   const initial = () => setInputValues(initialInputValues());
 
@@ -48,14 +48,18 @@ export default function MedalForm({ medalItems, setMedalItems }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateInput()) return;
+
     const newItems = {
       id: new Date().getTime(),
       ...copyCalculateTotal,
     };
-    setMedalItems([...medalItems, newItems]);
-    const medalData = JSON.parse(localStorage.getItem("medalData")) || [];
-    medalData.push(newItems);
-    localStorage.setItem("medalData", JSON.stringify(medalData));
+
+    const updatedItems = [...medalItems, newItems].sort(
+      (a, b) => b[selected] - a[selected]
+    );
+
+    setMedalItems(updatedItems);
+    localStorage.setItem("medalData", JSON.stringify(updatedItems));
     initial();
   };
 
