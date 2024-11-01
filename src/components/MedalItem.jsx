@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function MedalItem({ medalItems, setMedalItems }) {
   const filterById = (items, id) => items.filter((t) => t.id !== id);
