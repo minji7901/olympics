@@ -14,7 +14,11 @@ export default function MedalForm({ medalItems, setMedalItems }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (e.target.type === "number" && value.startsWith("0") && value.length > 1) {
+    if (
+      e.target.type === "number" &&
+      value.startsWith("0") &&
+      value.length > 1
+    ) {
       e.target.value = value.slice(1);
     }
     setInputValues((prevData) => ({
@@ -56,10 +60,10 @@ export default function MedalForm({ medalItems, setMedalItems }) {
   };
 
   const maxLengthCheck = (object) => {
-    if (object.value.length > object.maxLength){
+    if (object.value.length > object.maxLength) {
       object.value = object.value.slice(0, object.maxLength);
-    }    
-  }
+    }
+  };
 
   const updateItem = (item) => {
     return item.country === inputValues.country
@@ -71,8 +75,11 @@ export default function MedalForm({ medalItems, setMedalItems }) {
   };
 
   const handleUpdate = () => {
+    if (!isDuplicate()) {
+      alert("존재하지 않는 국가입니다");
+      return false;
+    }
     setMedalItems((prev) => prev.map(updateItem));
-
     let medalData = JSON.parse(localStorage.getItem("medalData"));
     medalData = medalData.map(updateItem);
     localStorage.setItem("medalData", JSON.stringify(medalData));
@@ -95,7 +102,7 @@ export default function MedalForm({ medalItems, setMedalItems }) {
               className={
                 i === 0 ? "text-center rounded-md" : "pl-1 w-10 rounded-md"
               }
-              maxLength={i === 0 ? null : 2 }
+              maxLength={i === 0 ? null : 2}
               placeholder={i === 0 ? "Enter country" : "0"}
               onInput={i === 0 ? null : (e) => maxLengthCheck(e.target)}
               required
