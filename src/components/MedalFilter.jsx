@@ -17,8 +17,8 @@ export default function MadalFilter({ selected, setSelected }) {
         onChange={handleSelect}
         value={selected}
       >
-        {filterList.map((item, i) => (
-          <option key={i} value={item}>
+        {filterList.map((item) => (
+          <option key={item} value={item}>
             {item}
           </option>
         ))}

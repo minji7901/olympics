@@ -91,8 +91,8 @@ export default function MedalForm({ medalItems, setMedalItems }) {
   return (
     <form className="flex gap-2 mt-10 mb-5" onSubmit={handleSubmit}>
       <div className="flex w-full gap-5">
-        {formArrName.map((name, i) => (
-          <div className="flex gap-2" key={i}>
+        {formArrName.map((name) => (
+          <div className="flex gap-2" key={name}>
             <span className="text-lg font-bold">{name}</span>
             <input
               type={i === 0 ? "text" : "number"}
