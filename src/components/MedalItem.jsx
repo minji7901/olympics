@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function MedalItem({ medalItems, setMedalItems }) {
   const filterById = (items, id) => items.filter((t) => t.id !== id);
@@ -9,6 +9,13 @@ export default function MedalItem({ medalItems, setMedalItems }) {
     getData = filterById(getData, deleted.id);
     localStorage.setItem("medalData", JSON.stringify(getData));
   };
+
+  useEffect(() => {
+    const sortedItems = [...medalItems].sort((a, b) => {
+      return b.gold - a.gold;
+    });
+    setMedalItems(sortedItems);
+  }, []);
 
   return medalItems.map((data) => (
     <tr key={data.id}>
