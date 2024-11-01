@@ -14,6 +14,9 @@ export default function MedalForm({ medalItems, setMedalItems }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (e.target.type === "number" && value.startsWith("0") && value.length > 1) {
+      e.target.value = value.slice(1);
+    }
     setInputValues((prevData) => ({
       ...prevData,
       [name]: name === "country" ? value : Number(value),
@@ -24,23 +27,9 @@ export default function MedalForm({ medalItems, setMedalItems }) {
     medalItems.some((data) => data.country === inputValues.country);
 
   const validateInput = () => {
-    const { country, gold, silver, bronze } = inputValues;
-    if (country === "" || isDuplicate()) {
-      alert(
-        country === ""
-          ? "나라를 입력해주세요"
-          : "동일한 나라가 이미 리스트에 있습니다."
-      );
+    if (isDuplicate()) {
+      alert("동일한 나라가 이미 리스트에 있습니다.");
       return false;
-    } else if (
-      gold < 0 ||
-      gold > 100 ||
-      silver < 0 ||
-      silver > 100 ||
-      bronze < 0 ||
-      bronze > 100
-    ) {
-      return alert("메달 갯수를 0개 이상 최대 2자리 숫자로 입력해주세요");
     }
     return true;
   };
@@ -66,15 +55,11 @@ export default function MedalForm({ medalItems, setMedalItems }) {
     initial();
   };
 
-  const validateCountry = () => {
-    const { country } = inputValues;
-    if (!country || !isDuplicate()) {
-      return alert(
-        country ? "존재하지 않는 국가입니다" : "나라를 입력해주세요"
-      );
-    }
-    return true;
-  };
+  const maxLengthCheck = (object) => {
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+    }    
+  }
 
   const updateItem = (item) => {
     return item.country === inputValues.country
@@ -86,7 +71,6 @@ export default function MedalForm({ medalItems, setMedalItems }) {
   };
 
   const handleUpdate = () => {
-    if (!validateCountry()) return;
     setMedalItems((prev) => prev.map(updateItem));
 
     let medalData = JSON.parse(localStorage.getItem("medalData"));
@@ -111,7 +95,10 @@ export default function MedalForm({ medalItems, setMedalItems }) {
               className={
                 i === 0 ? "text-center rounded-md" : "pl-1 w-10 rounded-md"
               }
+              maxLength={i === 0 ? null : 2 }
               placeholder={i === 0 ? "Enter country" : "0"}
+              onInput={i === 0 ? null : (e) => maxLengthCheck(e.target)}
+              required
             />
           </div>
         ))}

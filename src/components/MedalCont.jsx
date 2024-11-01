@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
+import MedalFilter from "./MedalFilter";
 import MedalItem from "./MedalItem";
 import { IoAlertCircleOutline } from "react-icons/io5";
-import { MdFilterAlt } from "react-icons/md";
 
 export default function MedalCont({ medalItems, setMedalItems }) {
   const [selected, setSelected] = useState("gold");
-  const filterList = ["gold", "silver", "bronze", "total"];
-
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
-  };
 
   useEffect(() => {
     const sortedItems = [...medalItems].sort((a, b) => {
@@ -20,21 +15,7 @@ export default function MedalCont({ medalItems, setMedalItems }) {
 
   return (
     <>
-      <div className="flex gap-2 items-center justify-end mb-3">
-        <MdFilterAlt />
-        <select
-          name="medal-filter"
-          id="medalFilter"
-          onChange={handleSelect}
-          value={selected}
-        >
-          {filterList.map((item, i) => (
-            <option key={i} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
+      <MedalFilter selected={selected} setSelected={setSelected} />
       <div className="h-[600px] px-10 shadow-2xl rounded-xl border border-softly-100 bg-white overflow-auto">
         <table className="table-auto w-full">
           <colgroup>
