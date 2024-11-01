@@ -95,16 +95,20 @@ export default function MedalForm({ medalItems, setMedalItems }) {
           <div className="flex gap-2" key={name}>
             <span className="text-lg font-bold">{name}</span>
             <input
-              type={i === 0 ? "text" : "number"}
+              type={name === "country" ? "text" : "number"}
               name={name}
               value={inputValues[name]}
               onChange={handleChange}
               className={
-                i === 0 ? "text-center rounded-md" : "pl-1 w-10 rounded-md"
+                name === "country"
+                  ? "text-center rounded-md"
+                  : "pl-1 w-10 rounded-md"
               }
-              maxLength={i === 0 ? null : 2}
-              placeholder={i === 0 ? "Enter country" : "0"}
-              onInput={i === 0 ? null : (e) => maxLengthCheck(e.target)}
+              maxLength={name === "country" ? null : 2}
+              placeholder={name === "country" ? "Enter country" : "0"}
+              onInput={
+                name === "country" ? null : (e) => maxLengthCheck(e.target)
+              }
               required
             />
           </div>
