@@ -83,10 +83,12 @@ export default function MedalForm({ medalItems, setMedalItems, selected }) {
       alert("존재하지 않는 국가입니다");
       return false;
     }
-    setMedalItems((prev) => prev.map(updateItem));
-    let medalData = JSON.parse(localStorage.getItem("medalData"));
-    medalData = medalData.map(updateItem);
-    localStorage.setItem("medalData", JSON.stringify(medalData));
+    const updatedItems = medalItems
+      .map(updateItem)
+      .sort((a, b) => b[selected] - a[selected]);
+
+    setMedalItems(updatedItems);
+    localStorage.setItem("medalData", JSON.stringify(updatedItems));
     initial();
   };
 
